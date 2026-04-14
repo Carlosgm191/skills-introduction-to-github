@@ -11,6 +11,7 @@ on:
     branches:
       - main
       - master
+      - hola
     paths:
       - .github/workflows/semgrep.yml
   # Schedule the CI job (this method uses cron syntax):
@@ -42,7 +43,12 @@ jobs:
           # Generate a token from Semgrep AppSec Platform > Settings
           # and add it to your GitHub secrets.
           SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
-
+  detect:
+    name: detect-secrets
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
       - name: setup python
         uses: actions/setup-python@v4
         with:
